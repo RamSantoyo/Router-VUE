@@ -1,25 +1,12 @@
 <script setup>
-import { ref } from '@vue/reactivity'
-import axios from 'axios'
-import { RouterLink } from 'vue-router'// para hacer una nueva ruta y mandar parametros
+import { RouterLink } from "vue-router"// para hacer una nueva ruta y mandar parametros
+import {useGetData} from "@/composables/getData"
 import cargar from '../components/loading.vue'//componente para mostrar un spinner
 
 
-let loading = ref(true);//para mostrar un spinner mientras carga la informacion
+const {pokeapi, pokemones, loading} = useGetData();
+pokeapi('https://pokeapi.co/api/v2/pokemon?limit=1000');
 
-let pokemones = ref([]);
-const pokeapi = async() => {
-    try {
-        const data = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0'); 
-        pokemones.value = data.data.results;
-    } catch (error) {
-        return error;
-    }finally{
-        loading.value = false;
-    }
-}
-
-pokeapi();
 </script>
 
 <template>
