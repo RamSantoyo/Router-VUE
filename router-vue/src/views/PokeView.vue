@@ -1,32 +1,19 @@
 <script setup>
-import { ref } from '@vue/reactivity'
-import axios from 'axios' //dependencia para hacer peticiones a una api
 import { useRoute, useRouter} from 'vue-router'
 import cargar from '../components/loading.vue'//componente para mostrar un spinner
+import {useGetData} from "@/composables/getData"
+
 
 const route = useRoute();//para acceder la ruta con el parametro
 const router = useRouter();// para modificar la ruta al hacer una accion
-
-const loading = ref(true);//para mostrar un spinner mientras carga la informacion
 
 const urlnueva = () => { //funcion para crear una nueva ruta
     router.push('/pokemons');
 }
 
-let statuspoke = ref({});//se ponen llaves para acceder a los objetos en este caso
-const pokedif = async() =>{
-    try{
-        const data = await axios.get(`https://pokeapi.co/api/v2/pokemon/${route.params.name}`);
-        statuspoke.value = data.data;
-    }catch(error){
-        return statuspoke.value = null;    
-    }finally{
-        loading.value = false;
-    }
-}
-
-pokedif();
-
+const {pokedif, statuspoke, loading} = useGetData();
+pokedif('https://pokeapi.co/api/v2/pokemon/' + route.params.name);
+        
 </script>
     
     <template>    
