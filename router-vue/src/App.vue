@@ -13,7 +13,8 @@ import HelloWorld from './components/HelloWorld.vue'
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <router-link to="/about" type="button" class="btn btn-outline-warning p-2 me-3">about</router-link>
-            <router-link to="/pokemons" type="button" class="btn btn-outline-warning p-2" >pokemones</router-link>
+            <router-link to="/pokemons" type="button" class="btn btn-outline-warning p-2 me-3" >pokemones</router-link>
+            <router-link to="/favoritos" type="button" class="btn btn-outline-warning p-2 me-3" >favoritos</router-link>
           </div>
         </div>
       </div>
